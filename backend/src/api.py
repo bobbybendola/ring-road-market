@@ -14,13 +14,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session as DBSession
-from datetime import datetime
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime, timezone
 from pathlib import Path
 import shutil
 import uuid
 import secrets
-from typing import Optional
 
 # ============================================
 # DATABASE SETUP
@@ -50,7 +49,7 @@ class User(Base):
     name = Column(String, nullable=False)
     password = Column(String, nullable=False)  # Store plain text for simplicity (NOT for production!)
     session_token = Column(String, unique=True, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
 
 
 class Listing(Base):
@@ -64,7 +63,7 @@ class Listing(Base):
     category = Column(String)
     image_url = Column(String)
     user_id = Column(Integer, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
 
 
 # Create tables
