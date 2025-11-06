@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import ProductInfo from './pages/ProductInfo';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,14 +30,31 @@ function App() {
     localStorage.removeItem('user');
   };
 
-  if (user) {
-    return <Dashboard user={user} onLogout={handleLogout} />;
-  }
-
-  return showSignup ? (
-    <Signup onLogin={handleLogin} onSwitchToLogin={() => setShowSignup(false)} />
-  ) : (
-    <Login onLogin={handleLogin} onSwitchToSignup={() => setShowSignup(true)} />
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            user ? (
+              <Navigate to="/dashboard" replace />
+            ) : showSignup ? (
+              <Signup onLogin={handleLogin} onSwitchToLogin={() => setShowSignup(false)} />
+            ) : (
+              <Login onLogin={handleLogin} onSwitchToSignup={() => setShowSignup(true)} />
+            )
+          } 
+        />
+        <Route 
+          path="/dashboard" 
+          element={user ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/listing/:id" 
+          element={user ? <ProductInfo /> : <Navigate to="/" replace />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

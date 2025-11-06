@@ -1,3 +1,7 @@
 .venv
 **/.env
 **/__pycache__/
+
+# Database file
+marketplace.db
+*.db
