@@ -23,4 +23,4 @@ We strengthened our full-stack development skills, improved team collaboration, 
 **What’s Next**
 We want to add in-app messaging, secure payments, and user ratings to make the marketplace even safer and more seamless.
 
-**Access our project presentation here! :** https://drive.google.com/file/d/10ylsrPr7lm14egiVyHuobAFh1CxWmAsP/view?usp=sharing
+**Access our project presentation here! :** https://drive.google.com/file/d/10ylsrPr7lm14egiVyHuobAFh1CxWmAsP/view?usp=sharing ; https://devpost.com/software/uci-marketplace?ref_content=my-projects-tab&ref_feature=my_projects
